@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="day">
+    <!-- Time of day classes: morning, day, evening, night -->
+    <!-- Add the appropriate class to the body element with JS -->
+    
+    <div class="sky-container">
+        <div class="sun-moon"></div>
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+        <div class="stars"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+            <h1>Weather Dashboard</h1>
+            <div class="search-container">
+                <input type="text" placeholder="Search for a city..." id="search-input">
+                <button id="search-button">Search</button>
+            </div>
+        </header>
+        
+        <main>
+            <section class="current-weather">
+                <div class="location">
+                    <h2>City Name</h2>
+                    <p class="date">Monday, March 8</p>
+                </div>
+                
+                <div class="weather-info">
+                    <div class="temperature">
+                        <span class="temp-value">25</span>
+                        <span class="temp-unit">°C</span>
+                    </div>
+                    
+                    <div class="weather-icon">
+                        <!-- Weather icon will be added via JS -->
+                    </div>
+                    
+                    <div class="weather-description">
+                        <p>Sunny</p>
+                    </div>
+                </div>
+                
+                <div class="weather-details">
+                    <div class="detail">
+                        <span class="detail-label">Feels like</span>
+                        <span class="detail-value">27°C</span>
+                    </div>
+                    <div class="detail">
+                        <span class="detail-label">Humidity</span>
+                        <span class="detail-value">65%</span>
+                    </div>
+                    <div class="detail">
+                        <span class="detail-label">Wind</span>
+                        <span class="detail-value">5 km/h</span>
+                    </div>
+                    <div class="detail">
+                        <span class="detail-label">Pressure</span>
+                        <span class="detail-value">1015 hPa</span>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="forecast">
+                <h3>5-Day Forecast</h3>
+                <div class="forecast-container">
+                    <div class="forecast-day">
+                        <p class="day-name">Tue</p>
+                        <div class="forecast-icon"></div>
+                        <p class="forecast-temp">24°C</p>
+                    </div>
+                    <div class="forecast-day">
+                        <p class="day-name">Wed</p>
+                        <div class="forecast-icon"></div>
+                        <p class="forecast-temp">26°C</p>
+                    </div>
+                    <div class="forecast-day">
+                        <p class="day-name">Thu</p>
+                        <div class="forecast-icon"></div>
+                        <p class="forecast-temp">23°C</p>
+                    </div>
+                    <div class="forecast-day">
+                        <p class="day-name">Fri</p>
+                        <div class="forecast-icon"></div>
+                        <p class="forecast-temp">22°C</p>
+                    </div>
+                    <div class="forecast-day">
+                        <p class="day-name">Sat</p>
+                        <div class="forecast-icon"></div>
+                        <p class="forecast-temp">25°C</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Your JavaScript will go here -->
+    <script src="script.js"></script>
+</body>
+</html>

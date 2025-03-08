@@ -1,0 +1,529 @@
+/* Base styles and variables */
+:root {
+    /* Day mode colors */
+    --day-bg-primary: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%);
+    --day-text: #333;
+    --day-card-bg: rgba(255, 255, 255, 0.85);
+    --day-shadow: rgba(0, 0, 0, 0.1);
+    
+    /* Morning colors */
+    --morning-bg-primary: linear-gradient(to bottom, #ff9a9e 0%, #fad0c4 100%);
+    --morning-text: #5a4a42;
+    --morning-card-bg: rgba(255, 255, 255, 0.85);
+    --morning-shadow: rgba(90, 74, 66, 0.1);
+    
+    /* Evening colors */
+    --evening-bg-primary: linear-gradient(to bottom, #a18cd1 0%, #fbc2eb 100%);
+    --evening-text: #4a3f5a;
+    --evening-card-bg: rgba(255, 255, 255, 0.85);
+    --evening-shadow: rgba(74, 63, 90, 0.1);
+    
+    /* Night colors */
+    --night-bg-primary: linear-gradient(to bottom, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    --night-text: #e0e0e0;
+    --night-card-bg: rgba(32, 33, 36, 0.85);
+    --night-shadow: rgba(0, 0, 0, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    transition: background 1.5s ease, color 1.5s ease;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Time of day styles */
+body.morning {
+    background: var(--morning-bg-primary);
+    color: var(--morning-text);
+}
+
+body.day {
+    background: var(--day-bg-primary);
+    color: var(--day-text);
+}
+
+body.evening {
+    background: var(--evening-bg-primary);
+    color: var(--evening-text);
+}
+
+body.night {
+    background: var(--night-bg-primary);
+    color: var(--night-text);
+}
+
+/* Sky animations */
+.sky-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.sun-moon {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    transition: all 1.5s ease;
+}
+
+body.morning .sun-moon {
+    background: #ff9a5c;
+    box-shadow: 0 0 60px #ff9a5c;
+    top: 15%;
+    left: 20%;
+    animation: rise 3s ease-out;
+}
+
+body.day .sun-moon {
+    background: #ffeb3b;
+    box-shadow: 0 0 80px #ffeb3b;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+body.evening .sun-moon {
+    background: #ff7e5f;
+    box-shadow: 0 0 60px #ff7e5f;
+    top: 15%;
+    right: 20%;
+    animation: set 3s ease-out;
+}
+
+body.night .sun-moon {
+    background: #f5f5f5;
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@keyframes rise {
+    from {
+        transform: translateY(50px);
+        opacity: 0.5;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes set {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(50px);
+        opacity: 0.5;
+    }
+}
+
+/* Cloud animations */
+.cloud {
+    position: absolute;
+    background: white;
+    border-radius: 50px;
+    opacity: 0.8;
+    transition: all 1.5s ease;
+}
+
+.cloud:before, .cloud:after {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+}
+
+.cloud-1 {
+    width: 120px;
+    height: 40px;
+    top: 25%;
+    left: 20%;
+    animation: float 20s linear infinite;
+}
+
+.cloud-1:before {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+    left: 15px;
+}
+
+.cloud-1:after {
+    width: 50px;
+    height: 50px;
+    top: -20px;
+    right: 15px;
+}
+
+.cloud-2 {
+    width: 100px;
+    height: 35px;
+    top: 15%;
+    right: 20%;
+    animation: float 25s linear infinite reverse;
+}
+
+.cloud-2:before {
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 10px;
+}
+
+.cloud-2:after {
+    width: 40px;
+    height: 40px;
+    top: -15px;
+    right: 10px;
+}
+
+.cloud-3 {
+    width: 80px;
+    height: 30px;
+    top: 35%;
+    left: 50%;
+    animation: float 30s linear infinite;
+}
+
+.cloud-3:before {
+    width: 40px;
+    height: 40px;
+    top: -20px;
+    left: 8px;
+}
+
+.cloud-3:after {
+    width: 35px;
+    height: 35px;
+    top: -15px;
+    right: 8px;
+}
+
+body.night .cloud {
+    opacity: 0.3;
+}
+
+@keyframes float {
+    0% {
+        transform: translateX(-100px);
+    }
+    100% {
+        transform: translateX(calc(100vw + 100px));
+    }
+}
+
+/* Stars (only visible at night) */
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+body.night .stars {
+    opacity: 1;
+    background-image: 
+        radial-gradient(1px 1px at 25% 10%, white, transparent),
+        radial-gradient(1px 1px at 40% 20%, white, transparent),
+        radial-gradient(2px 2px at 10% 30%, white, transparent),
+        radial-gradient(1px 1px at 60% 15%, white, transparent),
+        radial-gradient(1px 1px at 75% 25%, white, transparent),
+        radial-gradient(2px 2px at 30% 40%, white, transparent),
+        radial-gradient(1px 1px at 85% 50%, white, transparent),
+        radial-gradient(1px 1px at 15% 60%, white, transparent),
+        radial-gradient(2px 2px at 50% 70%, white, transparent),
+        radial-gradient(1px 1px at 70% 80%, white, transparent);
+    animation: twinkle 5s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+    0% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Main container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+input {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 30px;
+    background: #2196f3;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background: #0d8aee;
+}
+
+/* Current weather section */
+.current-weather {
+    background: var(--day-card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px var(--day-shadow);
+    transition: background 1.5s ease, box-shadow 1.5s ease;
+}
+
+body.morning .current-weather {
+    background: var(--morning-card-bg);
+    box-shadow: 0 10px 30px var(--morning-shadow);
+}
+
+body.evening .current-weather {
+    background: var(--evening-card-bg);
+    box-shadow: 0 10px 30px var(--evening-shadow);
+}
+
+body.night .current-weather {
+    background: var(--night-card-bg);
+    box-shadow: 0 10px 30px var(--night-shadow);
+}
+
+.location {
+    margin-bottom: 1.5rem;
+}
+
+.location h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.date {
+    color: #666;
+    font-size: 1rem;
+}
+
+body.night .date {
+    color: #aaa;
+}
+
+.weather-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.temperature {
+    font-size: 4rem;
+    font-weight: 600;
+    display: flex;
+    align-items: flex-start;
+}
+
+.temp-unit {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    margin-left: 0.25rem;
+}
+
+.weather-icon {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weather-description {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+}
+
+.detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.25rem;
+}
+
+body.night .detail-label {
+    color: #aaa;
+}
+
+.detail-value {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+/* Forecast section */
+.forecast {
+    background: var(--day-card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px var(--day-shadow);
+    transition: background 1.5s ease, box-shadow 1.5s ease;
+}
+
+body.morning .forecast {
+    background: var(--morning-card-bg);
+    box-shadow: 0 10px 30px var(--morning-shadow);
+}
+
+body.evening .forecast {
+    background: var(--evening-card-bg);
+    box-shadow: 0 10px 30px var(--evening-shadow);
+}
+
+body.night .forecast {
+    background: var(--night-card-bg);
+    box-shadow: 0 10px 30px var(--night-shadow);
+}
+
+.forecast h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.forecast-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+}
+
+.forecast-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s;
+}
+
+.forecast-day:hover {
+    transform: translateY(-5px);
+}
+
+.day-name {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.forecast-icon {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    margin: 0.5rem 0;
+}
+
+.forecast-temp {
+    font-weight: 500;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .weather-info {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .temperature {
+        font-size: 3rem;
+        justify-content: center;
+    }
+    
+    .weather-details {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .search-container {
+        flex-direction: column;
+    }
+    
+    input, button {
+        width: 100%;
+    }
+    
+    .forecast-container {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    }
+}
